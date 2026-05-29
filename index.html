@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة طويق للكربون</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gray-50">
+    <div id="root"></div>
+    <script type="text/babel">
+        function App() {
+            const [credits, setCredits] = React.useState([]);
+            const addCredit = () => {
+                const newCredit = { id: Date.now(), amount: 50, date: '2026/05/30' };
+                setCredits([newCredit, ...credits]);
+            };
+            return (
+                <div className="p-10 text-center">
+                    <h1 className="text-4xl font-bold text-green-700 mb-6">منصة طويق للكربون</h1>
+                    <button onClick={addCredit} className="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition">
+                        إصدار 50 طن
+                    </button>
+                    <div className="mt-8 max-w-md mx-auto">
+                        {credits.map(c => (
+                            <div key={c.id} className="bg-white p-4 my-2 rounded shadow border border-green-100">
+                                تم إصدار {c.amount} طن بتاريخ {c.date}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
